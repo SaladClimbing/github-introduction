@@ -1,7 +1,33 @@
 ---
-title: "Analysis 1"
+title: "A Beautiful Graphic"
 Author: "Andrew Lucas"
 format: html
+execute:
+    echo: false
 ---
 
-Andrew is a data maestro!
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+    geom_point(size = 2.5, alpha = 0.8) +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) +
+    facet_wrap(~drv) +
+    labs(
+        title = "Bigger Engines, Fewer Highway Miles",
+        subtitle = "Fuel economy trends across three drive types",
+        x = "Engine displacement (liters)",
+        y = "Highway miles per gallon",
+        color = "Vehicle class"
+    ) +
+    theme_minimal(base_size = 13) +
+    theme(
+        plot.title = element_text(face = "bold", size = 18),
+        plot.subtitle = element_text(color = "gray40"),
+        legend.position = "bottom",
+        panel.grid.minor = element_blank()
+    )
+```
